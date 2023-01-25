@@ -63,14 +63,14 @@ class _StandardWebViewAppState extends State<StandardWebView> {
                 _processUrl(url);
               },
             ),
-            Positioned(
-                right: 13,
-                top: -5,
-                child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(child: Text('Cancel'))))
+            // Positioned(
+            //     right: 13,
+            //     top: -5,
+            //     child: InkWell(
+            //         onTap: () {
+            //           Navigator.of(context).pop();
+            //         },
+            //         child: Container(child: Text('Cancel'))))
           ],
         ),
       ),

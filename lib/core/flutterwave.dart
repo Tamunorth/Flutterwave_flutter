@@ -88,6 +88,7 @@ class Flutterwave {
       MaterialPageRoute(
         builder: (context) => StandardWebView(
           url: standardResponse!.data!.link!,
+          style: style,
         ),
       ),
     );
