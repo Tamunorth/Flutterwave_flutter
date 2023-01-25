@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class FlutterwaveViewUtils {
-
   /// Displays a modal to confirm payment
   static Future<void> showConfirmPaymentModal(
     final BuildContext context,
@@ -14,7 +13,6 @@ class FlutterwaveViewUtils {
     final TextStyle modalContinueTextStyle,
     final Function onContinuePressed,
   ) async {
-
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -106,7 +104,6 @@ class FlutterwaveViewUtils {
       final Icon appBarIcon,
       final Color appBarColor,
       [final Function? handleBackPress]) {
-
     return AppBar(
       backgroundColor: appBarColor,
       titleTextStyle: appBarTitleTextStyle,
@@ -126,14 +123,13 @@ class FlutterwaveViewUtils {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-
   /// Displays a toast notification
   static void showToast(BuildContext context, String text) {
     Fluttertoast.showToast(
-        msg: text,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Color(0xAA383737),
-        textColor: Colors.white,
+      msg: text,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Color(0xAA383737),
+      textColor: Colors.white,
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,6 +12,7 @@ import 'flutterwave_style.dart';
 class StandardWebView extends StatefulWidget {
   final String url;
   final FlutterwaveStyle? style;
+
   const StandardWebView({required this.url, this.style});
 
   @override
@@ -20,7 +20,6 @@ class StandardWebView extends StatefulWidget {
 }
 
 class _StandardWebViewAppState extends State<StandardWebView> {
-
   @override
   void initState() {
     if (Platform.isAndroid) {
@@ -31,7 +30,6 @@ class _StandardWebViewAppState extends State<StandardWebView> {
 
   @override
   Widget build(BuildContext context) {
-
     final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {
       Factory(() => EagerGestureRecognizer())
     };
@@ -48,21 +46,35 @@ class _StandardWebViewAppState extends State<StandardWebView> {
       );
     }
 
-      return SafeArea(
-          child: Scaffold(
-            key: _key,
-            appBar: appBar,
-            body: WebView(
+    return Scaffold(
+      key: _key,
+      appBar: appBar,
+      backgroundColor: Colors.orange,
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [
+            WebView(
               initialUrl: widget.url,
-              javascriptMode:  JavascriptMode.unrestricted,
+              javascriptMode: JavascriptMode.unrestricted,
               gestureRecognizers: gestureRecognizers,
               onPageStarted: (webUrl) {
                 final url = Uri.parse(webUrl);
                 _processUrl(url);
               },
             ),
-          )
-      );
+            Positioned(
+                right: 13,
+                top: -5,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(child: Text('Cancel'))))
+          ],
+        ),
+      ),
+    );
   }
 
   _processUrl(Uri uri) {
@@ -105,8 +117,7 @@ class _StandardWebViewAppState extends State<StandardWebView> {
         status: status,
         transactionId: "$id",
         txRef: txRef,
-        success: status?.contains("success") == true
-    );
+        success: status?.contains("success") == true);
     Navigator.pop(context, chargeResponse);
   }
 
@@ -115,11 +126,10 @@ class _StandardWebViewAppState extends State<StandardWebView> {
     final txRef = uri.queryParameters["tx_ref"];
     final id = uri.queryParameters["transaction_id"];
     final ChargeResponse chargeResponse = ChargeResponse(
-      status: status,
-      transactionId: id,
-      txRef: txRef,
-      success: status?.contains("success") == true
-    );
+        status: status,
+        transactionId: id,
+        txRef: txRef,
+        success: status?.contains("success") == true);
     Navigator.pop(context, chargeResponse);
   }
 }
